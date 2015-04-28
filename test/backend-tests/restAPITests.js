@@ -5,6 +5,7 @@ var app = require("../../server/app");
 var http = require("http");
 var testPort = 9999;
 var testServer;
+var facade = require('../../server/model/facade');
 var mongoose = require("mongoose");
 var User = mongoose.model("User");
 
@@ -32,7 +33,7 @@ describe('REST API for /user', function () {
 
   after(function(){  //Stop server after the test
     //Uncomment the line below to completely remove the database, leaving the mongoose instance as before the tests
-    //mongoose.connection.db.dropDatabase();
+    mongoose.connection.db.dropDatabase();
     testServer.close();
   })
 
@@ -49,3 +50,42 @@ describe('REST API for /user', function () {
     })
   });
 });
+
+describe('getWiki title and returns complete wiki object with that', function(done){
+    facade.getWiki("work", function(err, wikii){
+        if(err) throw err;;
+        wikii[0].title.should.equal("Abu Dhabi")
+        done();
+    })
+
+});
+
+it('should return a list of titles that match the search string', function(done){
+    facade.findWiki("work", function(err, wikii){
+
+    if(err) throw err;;
+    wikii[1].title.should.equal("")
+        done();
+
+    })
+});
+
+//getCategories
+//getWikisWithCategory
+
+it('should get categories', function(err, wikii){
+    facade.getCategories('work', function(err, wikii){
+        if(err) throw err;;
+
+    })
+});
+
+it('should get wikis with category', function(err, wikii){
+    facade.getWikisWithCategory('work', function(err, wikii){
+        if(err) throw err;;
+
+})
+
+});
+
+
