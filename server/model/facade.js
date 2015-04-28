@@ -10,6 +10,7 @@ function getWiki(title,callback){
     });
 }
 
+console.log("test commit");
 module.exports = {
     getWiki: getWiki
 }
