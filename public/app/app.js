@@ -13,5 +13,15 @@ angular.module('myAppRename', [
   'myAppRename.view3'
 ]).
 config(['$routeProvider', function($routeProvider) {
-    $routeProvider.otherwise({redirectTo: '/view1'});
+      $routeProvider
+          .when("/findwiki", {
+            templateUrl: 'findWiki/findWiki.html',
+            controller: "findWikiCtrl"
+          })
+          .when("/wiki/:title", {
+            templateUrl: 'findWiki/wiki.html',
+            controller: "wiki"
+          })
+          .otherwise(
+          {redirectTo: "/view2.js"})
 }]);

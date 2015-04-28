@@ -1,0 +1,13 @@
+<table class="form-group">
+    <thead>
+<tr><th colspan="2">Søg</th></tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="text" class="form-control" ng-model="search" placeholder="arsenal"> </td>
+        <td><input type="submit" value="Søg" ng-click="FindWiki(search)" style="margin-left: 20% ;" class="form-control"> </td>
+    </tr>
+    </tbody>
+</table>
+
+<p ng-repeat="data in data"><a href="#/wiki/{{data.title}}">{{data.title}}</a> </p>
