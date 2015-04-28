@@ -1,4 +1,5 @@
-global.TEST_DATABASE = "mongodb://localhost/TestDataBase_xx1243";
+global.TEST_DATABASE = "mongodb://localhost/TestDataBase_xx1243"
+require("../../server/model/db");
 
 var should = require("should");
 var app = require("../../server/app");
@@ -7,85 +8,48 @@ var testPort = 9999;
 var testServer;
 var facade = require('../../server/model/facade');
 var mongoose = require("mongoose");
-var User = mongoose.model("User");
+var Wiki = mongoose.model("wiki");
 
-describe('REST API for /user', function () {
-  //Start the Server before the TESTS
-  before(function (done) {
-    testServer = app.listen(testPort, function () {
-      console.log("Server is listening on: " + testPort);
-      done();
-    })
-    .on('error',function(err){
-        console.log(err);
-      });
-  })
 
-  beforeEach(function(done){
-    User.remove({}, function ()
-    {
-      var array = [{userName : "Lars", email :"lars@a.dk",pw: "xxx"},{userName : "Henrik", email :"henrik@a.dk",pw: "xxx"}];
-      User.create(array,function(err){
-        done();
-      });
+
+var wikiOpret = [
+    {title: "TestNavn", url: "http://",abstract :"abstracs1",categories : "programming",links:"http://www.s.com", headings:"something"},
+    {title: "TestNavn2", url: "http://",abstract :"abstract2",categories : "football",links:"http://www.f.com", headings:"something else"}
+];
+
+describe ('Wiki', function(){
+
+    beforeEach(function (done){
+        Wiki.remove({}, function () {
+            Wiki.create(wikiOpret, function (err, wikie) {
+                done();
+            })
+        });
     });
-  })
-
-  after(function(){  //Stop server after the test
-    //Uncomment the line below to completely remove the database, leaving the mongoose instance as before the tests
-    mongoose.connection.db.dropDatabase();
-    testServer.close();
-  })
-
-  it("Should get 2 users; Lars and Henrik", function (done) {
-    http.get("http://localhost:"+testPort+"/api/user",function(res){
-      res.setEncoding("utf8");//response data is now a string
-      res.on("data",function(chunk){
-        var n = JSON.parse(chunk);
-        n.length.should.equal(2);
-        n[0].userName.should.equal("Lars");
-        n[1].userName.should.equal("Henrik");
+    after(function (done) {
+        //Uncomment the lines below to completely remove the test database after the tests
+        if (global.TEST_DATABASE) {
+            mongoose.connection.db.dropDatabase();
+        }
         done();
-      });
-    })
-  });
-});
+    });
 
-describe('getWiki title and returns complete wiki object with that', function(done){
-    facade.getWiki("work", function(err, wikii){
-        if(err) throw err;;
-        wikii[0].title.should.equal("Abu Dhabi")
-        done();
-    })
+
+
+
+        it("return en title", function (done) {
+            facade.findWiki("Abraham Lincon",function (err, wikie) {
+                if (err) throw err;;
+                wikie.title.should.equal("Abraham Lincon");
+                done();
+            })
+        });
+
+
+
 
 });
 
-it('should return a list of titles that match the search string', function(done){
-    facade.findWiki("work", function(err, wikii){
-
-    if(err) throw err;;
-    wikii[1].title.should.equal("")
-        done();
-
-    })
-});
-
+//getWiki
 //getCategories
-//getWikisWithCategory
-
-it('should get categories', function(err, wikii){
-    facade.getCategories('work', function(err, wikii){
-        if(err) throw err;;
-
-    })
-});
-
-it('should get wikis with category', function(err, wikii){
-    facade.getWikisWithCategory('work', function(err, wikii){
-        if(err) throw err;;
-
-})
-
-});
-
-
+//getWikiwithCategory
