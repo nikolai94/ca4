@@ -34,6 +34,7 @@ router.get('/findWiki/:title', function(req, res) {
         res.end("Error:");
         return;
     }
+
     facade.findWiki(title,function(err,result){
         if(err){
             res.status(err.status || 400);
@@ -45,5 +46,51 @@ router.get('/findWiki/:title', function(req, res) {
 
     });
 });
+
+
+
+router.get('/getCategories', function(req, res) {
+    var title = req.params.title;
+    if(typeof global.mongo_error !== "undefined"){
+        res.status(500);
+        res.end("Error:");
+        return;
+    }
+
+    facade.getCategories(function(err,result){
+        if(err){
+            res.status(err.status || 400);
+            res.end(JSON.stringify({error: err.toString()}));
+            return;
+        }
+        res.header("Content-type","application/json");
+        res.end(JSON.stringify(result));
+
+    });
+});
+
+
+
+router.get('/getWikisWithCategory/:category', function(req, res) {
+    var category = req.params.category;
+    if(typeof global.mongo_error !== "undefined"){
+        res.status(500);
+        res.end("Error:");
+        return;
+    }
+
+    facade.getWikisWithCategory(category,function(err,result){
+        if(err){
+            res.status(err.status || 400);
+            res.end(JSON.stringify({error: err.toString()}));
+            return;
+        }
+        res.header("Content-type","application/json");
+        res.end(JSON.stringify(result));
+
+    });
+});
+
+
 
 module.exports = router;

@@ -20,8 +20,30 @@ function findWiki(title,callback){
     });
 }
 
-console.log("test commit");
+function getCategories(callback){
+    wiki.distinct('title', function (err, data) {
+        if (err) {
+            return callback(err);
+        }
+        return callback(data);
+    });
+}
+
+
+function getWikisWithCategory(category,callback){
+    wiki.find({categories: category}, function (err, data) {
+        if (err) {
+            return callback(err);
+        }
+        return callback(null,data);
+    });
+}
+
+
+
 module.exports = {
     getWiki: getWiki,
-    findWiki : findWiki
+    findWiki : findWiki,
+    getCategories : getCategories,
+    getWikisWithCategory : getWikisWithCategory
 }
