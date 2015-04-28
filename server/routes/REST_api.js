@@ -42,11 +42,11 @@ router.get('/findWiki/:title', function(req, res) {
             return;
         }
         res.header("Content-type","application/json");
-        var arr = [];
+        /*var arr = [];
         for(var i =0; i < result.length;i++ ){
             arr.push({"title":result[i].title, "abstract":result[i].abstract});
-        }
-        res.end(JSON.stringify(arr));
+        }*/
+        res.end(JSON.stringify(result));
 
     });
 });
@@ -67,15 +67,10 @@ router.get('/getCategories', function(req, res) {
             res.end(JSON.stringify({error: err.toString()}));
             return;
         }
-        var arr = [];
-        for(var i =0; i < result.length;i++ ){
-            arr.push({"categories":result[i].categories});
-        }
-
-
 
         res.header("Content-type","application/json");
-        res.end(JSON.stringify(arr));
+        res.end(JSON.stringify({categories :result}));
+
 
     });
 });
