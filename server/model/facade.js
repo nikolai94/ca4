@@ -10,7 +10,18 @@ function getWiki(title,callback){
     });
 }
 
+
+function findWiki(title,callback){
+    wiki.find({title: new RegExp(title, 'i')}, function (err, data) {
+        if (err) {
+            return callback(err);
+        }
+        return callback(null,data);
+    });
+}
+
 console.log("test commit");
 module.exports = {
-    getWiki: getWiki
+    getWiki: getWiki,
+    findWiki : findWiki
 }

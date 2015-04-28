@@ -10,7 +10,7 @@ router.get('/wiki/:title', function(req, res) {
     var title = req.params.title;
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
-    res.end("Error: "+global.mongo_error+" To see a list of users here, make sure you have started the database and set up some test users (see model-->db.js for instructions)");
+    res.end("Error:");
     return;
   }
     facade.getWiki(title,function(err,result){
@@ -23,16 +23,27 @@ router.get('/wiki/:title', function(req, res) {
         res.end(JSON.stringify(result));
 
     });
-   /* wiki.find({title: "Abu Dhabi"}, function (err, data) {
-    if (err) {
-      res.status(err.status || 400);
-      res.end(JSON.stringify({error: err.toString()}));
-      return;
-    }
-    res.header("Content-type","application/json");
-    res.end(JSON.stringify(data));
-  });*/
+});
 
+
+
+router.get('/findWiki/:title', function(req, res) {
+    var title = req.params.title;
+    if(typeof global.mongo_error !== "undefined"){
+        res.status(500);
+        res.end("Error:");
+        return;
+    }
+    facade.findWiki(title,function(err,result){
+        if(err){
+            res.status(err.status || 400);
+            res.end(JSON.stringify({error: err.toString()}));
+            return;
+        }
+        res.header("Content-type","application/json");
+        res.end(JSON.stringify(result));
+
+    });
 });
 
 module.exports = router;
