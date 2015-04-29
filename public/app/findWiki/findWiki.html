@@ -10,4 +10,21 @@
     </tbody>
 </table>
 
-<p ng-repeat="data in data"><a href="#/wiki/{{data.title}}">{{data.title}}</a> </p>
+<style>
+    .box {
+        width: 15em;
+        min-height: 3em;
+        float: left;
+    }
+
+</style>
+<div style=" float: left; ">
+    <!--<a href="#" ng-mouseenter="ON('Arsenal ship')" ng-mouseleave="OFF()">
+        Test 1 2 3.
+    </a>-->
+
+    <div style="float: left; margin-right: 20px;">
+<p ng-repeat="data in data"><a ng-mouseenter="mouseOn(data.title)" ng-mouseleave="mouseOff()" href="#/wiki/{{data.title}}">{{data.title}}</a> </p>
+</div>
+    <div class="box ng-hide span2 well" ng-show="myValue" >{{text}}<br/></div>
+</div>

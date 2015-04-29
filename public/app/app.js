@@ -22,6 +22,10 @@ config(['$routeProvider', function($routeProvider) {
             templateUrl: 'findWiki/wiki.html',
             controller: "wiki"
           })
+          .when("/categories", {
+              templateUrl: 'categories/index.html',
+              controller: "categories"
+          })
           .otherwise(
           {redirectTo: "/view2.js"})
 }]);

@@ -37,3 +37,16 @@ app.factory('wikiFactory', ['$http', function($http)
   return dataFactory;
 
 }]);
+
+
+app.factory('getCategories', ['$http', function($http)
+{
+    var url = "/api/getCategories/";
+    var dataFactory = {};
+    dataFactory.getData = function()
+    {
+        return $http.get(url);
+    }
+    return dataFactory;
+
+}]);
