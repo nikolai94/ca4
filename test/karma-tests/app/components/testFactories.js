@@ -14,7 +14,15 @@ describe('myAppRename.factories', function () {
   });
 
 
-  describe('XXXFactory', function () {
+  describe('wikiFactory', function () {
+    var wikiFactory;
+    beforeEach(inject(function (_wikiFactory_) {
+      wikiFactory = _wikiFactory_;
+    }));
 
+    it('Should be Hello World from a Factory', function () {
+      wikiFactory.getData("'Ndrangheta").success(function (data) {
+      })
+    });
   });
 });
