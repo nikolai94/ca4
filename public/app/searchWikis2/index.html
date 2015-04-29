@@ -1,0 +1,37 @@
+<h1>Search Pagination!</h1>
+
+<table class="form-group">
+    <thead>
+    <tr><th colspan="2">Søg</th></tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="text" class="form-control" ng-model="search" placeholder="arsenal"> </td>
+        <td><input type="submit" value="Søg" ng-click="FindWiki(search)" style="margin-left: 20% ;" class="form-control"> </td>
+    </tr>
+    </tbody>
+</table>
+
+<style>
+    .box {
+        width: 15em;
+        min-height: 3em;
+        float: left;
+    }
+
+</style>
+<div style=" float: left; min-height:10em;  width: 35em; ">
+
+    <div style="float: left;">
+        <p ng-repeat="data in filteredTodos"><a href="#/wiki/{{data.title}}" tooltip-placement="right" tooltip="{{data.abstract}}">{{data.title}}</a> </p>
+    </div>
+
+
+    <div style="float: left;" data-pagination="" total-items="numPages"
+         ng-model="currentPage" data-max-size="maxSize"
+         data-boundary-links="true"></div>
+
+
+
+
+</div>

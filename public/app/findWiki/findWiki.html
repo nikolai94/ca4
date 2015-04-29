@@ -24,7 +24,8 @@
     </a>-->
 
     <div style="float: left; margin-right: 20px;">
-<p ng-repeat="data in data"><a ng-mouseenter="mouseOn(data.title)" ng-mouseleave="mouseOff()" href="#/wiki/{{data.title}}">{{data.title}}</a> </p>
+<p ng-repeat="data in data"><a href="#/wiki/{{data.title}}" tooltip-placement="right" tooltip="{{data.abstract}}">{{data.title}}</a> </p>
 </div>
-    <div class="box ng-hide span2 well" ng-show="myValue" >{{text}}<br/></div>
+
+   <!-- <div class="box ng-hide span2 well" ng-show="myValue" >{{text}}<br/></div> -->
 </div>

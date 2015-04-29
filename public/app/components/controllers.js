@@ -10,7 +10,7 @@ var artikler;
       findWikiFactory.getData(input).success(function(data){
        $scope.data =data;
 
-          $scope.mouseOn = function(title){
+         /* $scope.mouseOn = function(title){
               for(var i = 0; i < data.length;i++){
                   if(data[i].title === title){
                     $scope.myValue = true;
@@ -19,7 +19,7 @@ var artikler;
               }
           };
           $scope.mouseOff = function(){ $scope.myValue = false; $scope.text=""; };
-
+            */
       })
     }
 
@@ -74,12 +74,12 @@ app.controller('categories',['$scope','getCategories','$routeParams', function($
     getCategories.getData().success(function (data) {
 
         $scope.categories = data;
+
         $scope.categoriesAlp = function(str){
             var newArr = [];
             for(var i =0; i < data.categories.length; i++ ){
 
                 if(data.categories[i] !== null){
-
                     if(data.categories[i].charAt(0).toLowerCase() === str){
                         //console.log("test: "+ data.categories[i]);
                        newArr.push(data.categories[i]);
@@ -98,16 +98,48 @@ app.controller('categories',['$scope','getCategories','$routeParams', function($
 
 app.controller('inCategori',['$scope','getWikisWithCategory','$routeParams', function($scope,getWikisWithCategory,$routeParams) {
     var param1 = $routeParams.cat;
-
-
         getWikisWithCategory.getData(param1).success(function (data) {
             $scope.arr = data;
         })
+}]);
+
+
+app.controller('searchWikis2',['$scope','findWikiFactory', function($scope,findWikiFactory) {
+    $scope.FindWiki = function(input)
+    {
+        findWikiFactory.getData(input).success(function(data){
+            //--------------------------START
+
+            $scope.filteredTodos = [],
+            $scope.currentPage = 1,
+            $scope.numPerPage = 10,
+            $scope.maxSize = 5;
+
+
+            /* $scope.numPages = function () {
+                return Math.ceil(data.length / $scope.numPerPage);
+            };*/
+           $scope.numPages = Math.ceil(data.length / $scope.numPerPage);
+
+            $scope.$watch('currentPage + numPerPage', function() {
+                var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                    , end = begin + $scope.numPerPage;
+
+                $scope.filteredTodos = data.slice(begin, end);
+            });
+
+
+
+
+
+            //----------------STOP
+        });
+    };
+
 
 
 
 }]);
-
 
 
 

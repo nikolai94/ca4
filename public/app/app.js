@@ -30,6 +30,11 @@ config(['$routeProvider', function($routeProvider) {
               templateUrl: 'categories/inCategori.html',
               controller: "inCategori"
           })
+
+          .when("/searchWikis2", {
+              templateUrl: 'searchWikis2/index.html',
+              controller: "searchWikis2"
+          })
           .otherwise(
-          {redirectTo: "/view2.js"})
+          {redirectTo: "/view2"})
 }]);
