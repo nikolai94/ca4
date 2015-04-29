@@ -26,6 +26,10 @@ config(['$routeProvider', function($routeProvider) {
               templateUrl: 'categories/index.html',
               controller: "categories"
           })
+          .when("/categories/:cat", {
+              templateUrl: 'categories/inCategori.html',
+              controller: "inCategori"
+          })
           .otherwise(
           {redirectTo: "/view2.js"})
 }]);

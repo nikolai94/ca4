@@ -50,3 +50,16 @@ app.factory('getCategories', ['$http', function($http)
     return dataFactory;
 
 }]);
+
+
+app.factory('getWikisWithCategory', ['$http', function($http)
+{
+    var url = "/api/getWikisWithCategory/";
+    var dataFactory = {};
+    dataFactory.getData = function(str)
+    {
+        return $http.get(url+str);
+    }
+    return dataFactory;
+
+}]);

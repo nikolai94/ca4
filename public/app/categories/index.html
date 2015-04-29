@@ -1,4 +1,5 @@
 <h1>Categories</h1>
-<p>{{title}}</p>
 
-<a href="#" ng-repeat="row in categories.categories">{{row}}<br/></a>
+<a ng-repeat="rows in alphabet" ng-click="categoriesAlp(rows)"> {{rows}}</a>
+<br/><br/>
+<a ng-repeat="row in categories.categories" href="#/categories/{{row}}" >{{row}}<br/></a>
