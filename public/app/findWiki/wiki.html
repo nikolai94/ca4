@@ -1,3 +1,6 @@
-<h1>Test</h1>
-<h2>{{title}}</h2>
-<p>{{data[0].abstract}}</p>
+<h1>Title :{{data[0].title}}</h1>
+<div><b>Categories:</b> <p ng-repeat="rowCat in data[0].categories">{{rowCat}}</p> </div>
+<br/>
+<div><b>Link:</b> <p ng-repeat="rowLink in data[0].links">{{rowLink}}</p> </div>
+
+<p><b>Abstract:</b><br/>{{data[0].abstract}}</p>
