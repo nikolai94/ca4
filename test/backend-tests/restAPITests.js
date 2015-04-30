@@ -1,238 +1,100 @@
-global.TEST_DATABASE = "mongodb://localhost/TestDataBase_xx1243";
-require("../../server/model/db");
+var should = require('should');
+var request = require("request");
+http://localhost:3000/api/wiki/'Ndrangheta
 
-var facade = require('../../server/model/facade');
-var mongoose = require("mongoose");
-var Wiki = mongoose.model("wiki");
-var should = require("should");
+describe("Rest Api", function() {
 
-var wikiOpret = [
-    {"title":"'Ndrangheta","url":"http","abstract":"The Calabrian  'test.","headings":[{"heading":"Economy","position":2},{"heading":"External links","position":4},{"heading":"Origins","position":3},{"heading":"Power structure","position":1}],"links":["http://en.wikipedia.org/wiki/Apulia","http://en.wikipedia.org/wiki/Belgium"],"categories":["Crime in Italy","Mafia groups","test2"]},
-    {"title":"'test","url":"http","abstract":"The Calabrian  'test.","headings":[{"heading":"Economy","position":2},{"heading":"External links","position":4},{"heading":"Origins","position":3},{"heading":"Power structure","position":1}],"links":["http://en.wikipedia.org/wiki/Apulia","http://en.wikipedia.org/wiki/Belgium"],"categories":["test2","test3"]}
-];
-
-describe ('getCategories', function(){
-    beforeEach(function (done){
-
-        Wiki.remove({}, function () {
-            Wiki.create(wikiOpret, function (err, newQuotes) {
-
-
+    describe("GET WIKI", function() {
+        it("should find 1 wiki by title:", function (done) {
+            request({method: 'GET', url: "http://localhost:3000/api/wiki/'Ndrangheta", json: true}, function (err, res, body) {
+                if(err) throw err;
+                body.should.have.length(1);
                 done();
-            })
-        });
-    });
-    after(function (done) {
-        //Uncomment the lines below to completely remove the test database after the tests
-        if (global.TEST_DATABASE) {
-            mongoose.connection.db.dropDatabase();
-        }
-        done();
-    });
-
-
-    it("should find 2 categories", function (done) {
-        facade.getCategories(function(err,data)
-        {
-            data.length.should.equal(4);
-            done();
+            });
         })
 
-    });
-
-    it("should find specific categori", function (done) {
-        facade.getCategories(function(err,data)
-        {
-            data[1].should.equal("Mafia groups");
-            done();
-        })
-
-    });
-
-});
-
-describe ('findWiki', function(){
-
-    beforeEach(function (done){
-
-        Wiki.remove({}, function () {
-
-            Wiki.create(wikiOpret, function (err, newQuotes) {
-
-
+        it("should find 1 wiki by with title 'Ndrangheta :", function (done) {
+            request({method: 'GET', url: "http://localhost:3000/api/wiki/'Ndrangheta", json: true}, function (err, res, body) {
+                if(err) throw err;
+                body[0].title.should.equal("'Ndrangheta");
                 done();
-            })
-        });
-    });
-    after(function (done) {
-        //Uncomment the lines below to completely remove the test database after the tests
-        if (global.TEST_DATABASE) {
-            mongoose.connection.db.dropDatabase();
-        }
-        done();
-    });
-
-    it("size should equal 1", function (done) {
-        facade.findWiki("test",function(err,data)
-        {
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-                data.length.should.equal(1);
-            }
-            done();
+            });
         })
+    })
 
-    });
-
-    it("size should equal 2", function (done) {
-        facade.findWiki("",function(err,data)
-        {
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-                data.length.should.equal(2);
-            }
-            done();
-        })
-
-    });
-
-
-
-    it("should find title 'test", function (done) {
-        facade.findWiki("test",function(err,data)
-        {
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-            data[0].title.should.equal("'test");
-            }
-            done();
-        })
-
-    });
-
-});
-
-
-describe ('getWikisWithCategory', function(){
-
-    beforeEach(function (done){
-
-        Wiki.remove({}, function () {
-
-            Wiki.create(wikiOpret, function (err, newQuotes) {
-
-
+    describe("Find WIKI", function() {
+        it("should find 1 wiki by title arsenal:", function (done) {
+            request({method: 'GET', url: "http://localhost:3000/api/findWiki/arsenal", json: true}, function (err, res, body) {
+                if(err) throw err;
+                body.should.have.length(1);
                 done();
-            })
-        });
-    });
-    after(function (done) {
-        //Uncomment the lines below to completely remove the test database after the tests
-        if (global.TEST_DATABASE) {
-            mongoose.connection.db.dropDatabase();
-        }
-        done();
-    });
-
-    it("should find 2 category with test2", function (done) {
-        facade.getWikisWithCategory("test2",function(err,data)
-        {
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-                data.length.should.equal(2);
-            }
-            done();
+            });
         })
 
-    });
-
-
-    it("should find 1 category with test3", function (done) {
-        facade.getWikisWithCategory("test3",function(err,data)
-        {
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-                data.length.should.equal(1);
-            }
-            done();
-        })
-
-    });
-
-
-});
-
-describe ('findWiki', function(){
-
-    beforeEach(function (done){
-
-        Wiki.remove({}, function () {
-
-            Wiki.create(wikiOpret, function (err, newQuotes) {
-
-
+        it("should find Arsenal ship wiki by title arsenal:", function (done) {
+            request({method: 'GET', url: "http://localhost:3000/api/findWiki/arsenal", json: true}, function (err, res, body) {
+                if(err) throw err;
+             body[0].title.should.equal("Arsenal ship");
                 done();
-            })
-        });
-    });
-    after(function (done) {
-        //Uncomment the lines below to completely remove the test database after the tests
-        if (global.TEST_DATABASE) {
-            mongoose.connection.db.dropDatabase();
-        }
-        done();
-    });
-
-    it("should find 1 with search string 'test ", function (done) {
-        facade.findWiki("'test",function(err,data)
-        {
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-                data.length.should.equal(1);
-            }
-            done();
+            });
         })
 
-    });
 
-    it("should find 1 with search string 'Test ", function (done) {
-        facade.findWiki("'Test",function(err,data)
-        {
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-                data.length.should.equal(1);
-            }
-            done();
+
+        it("should find 19 wiki by title java:", function (done) {
+            request({method: 'GET', url: "http://localhost:3000/api/findWiki/java", json: true}, function (err, res, body) {
+                if(err) throw err;
+                body.should.have.length(17);
+                done();
+            });
         })
 
-    });
 
-});
+
+    })
+
+
+    describe("get Categories", function() {
+
+        it("checking categories length:", function (done) {
+            request({method: 'GET', url: "http://localhost:3000/api/getCategories", json: true}, function (err, res, body) {
+                if(err) {throw err}
+               body.categories.length.should.equal(13314);
+                done();
+            });
+        })
+
+
+    })
+
+    describe("get Wikis With Category", function() {
+
+        it("should get 6 objects:", function (done) {
+            request({method: 'GET', url: "http://localhost:3000/api/getWikisWithCategory/Java%20platform", json: true}, function (err, res, body) {
+                if(err) {throw err}
+                body.length.should.equal(6);
+                done();
+            });
+        })
+
+        it("should get 1 object:", function (done) {
+            request({method: 'GET', url: "http://localhost:3000/api/getWikisWithCategory/Ajax%20Amsterdam%20footballers", json: true}, function (err, res, body) {
+                if(err) {throw err}
+                body.length.should.equal(1);
+                done();
+            });
+        })
+
+        it("should get 1 object with title marco van basten:", function (done) {
+            request({method: 'GET', url: "http://localhost:3000/api/getWikisWithCategory/Ajax%20Amsterdam%20footballers", json: true}, function (err, res, body) {
+                if(err) {throw err}
+                body[0].title.should.equal("Marco van Basten");
+                done();
+            });
+        })
+
+
+
+    })
+
+})
