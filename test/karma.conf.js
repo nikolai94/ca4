@@ -8,6 +8,8 @@ module.exports = function(config){
       'public/vendor/angular-route/angular-route.js',
       'public/vendor/angular-mocks/angular-mocks.js',
       'public/app/*.js',
+      'public/vendor/angular-bootstrap/ui-bootstrap.js',
+      'public/vendor/angular-bootstrap/ui-bootstrap-tpls.js',
       'public/app/components/**/*.js',
       'public/app/components/*.js',
       'public/app/view*/**/*.js',

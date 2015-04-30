@@ -1,3 +1,4 @@
+/*
 'use strict';
 
 describe('myAppRename.services', function () {
@@ -21,3 +22,4 @@ describe('myAppRename.services', function () {
 
   });
 });
+    */

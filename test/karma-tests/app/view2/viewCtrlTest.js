@@ -1,3 +1,4 @@
+/*
 describe('myAppRename.view2 view2Ctrl', function() {
 
   describe('myController', function() {
@@ -29,3 +30,4 @@ describe('myAppRename.view2 view2Ctrl', function() {
     });
   });
 });
+    */

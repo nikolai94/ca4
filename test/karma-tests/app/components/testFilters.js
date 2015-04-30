@@ -1,3 +1,4 @@
+/*
 'use strict';
 
 describe('myAppRename.filters', function () {
@@ -18,3 +19,4 @@ describe('myAppRename.filters', function () {
   })
 });
 
+*/

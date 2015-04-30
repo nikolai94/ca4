@@ -1,3 +1,4 @@
+/*
 describe('myAppRename.view3 View3Ctrl', function() {
 
   var scope, httpBackendMock, ctrl;
@@ -28,3 +29,5 @@ describe('myAppRename.view3 View3Ctrl', function() {
   });
 
 });
+
+    */

@@ -1,3 +1,4 @@
+/*
 'use strict';
 
 describe('myAppRename.view1 module', function() {
@@ -14,3 +15,4 @@ describe('myAppRename.view1 module', function() {
 
   });
 });
+    */
